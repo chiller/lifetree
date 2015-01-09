@@ -1,10 +1,16 @@
-<!DOCTYPE html>
+{% load staticfiles %}
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <title>Lifetree</title>
 </head>
 <body>
-    {{ xp | safe }}
+    <div>
+        {{ xp | safe }}
+    </div>
+
+    <img width="100" src="{% static 'images/Dp65Cmg.png' %}">
 </body>
 </html>
