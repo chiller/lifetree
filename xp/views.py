@@ -15,8 +15,7 @@ def xp():
     return TimeLog.objects.aggregate(Sum('minutes'))['minutes__sum']
 
 
-def level():
-    xpamt = xp()
+def level(xpamt):
     level = int((xpamt/100.0)**0.5) + 1
     lower = (level - 1) ** 2 * 100
     upper = level ** 2 * 100
@@ -24,4 +23,4 @@ def level():
     return "".join(map(str,(["Level", level, " Xp ",xpamt, "<br/>", lower, "*"*pct+'.'*(10-pct) ,upper])))
 
 def xpview(request):
-    return HttpResponse(level())
+    return HttpResponse(level(xp()))

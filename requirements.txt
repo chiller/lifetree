@@ -3,3 +3,5 @@ ipython
 django-extensions
 pytest
 pytest-django
+pytest-xdist
+pytest-cov
