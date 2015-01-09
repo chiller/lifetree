@@ -2,9 +2,6 @@ from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
-
-#TODO: tests
 
 from xp.models import TimeLog
 
@@ -23,4 +20,5 @@ def level(xpamt):
     return "".join(map(str,(["Level", level, " Xp ",xpamt, "<br/>", lower, "*"*pct+'.'*(10-pct) ,upper])))
 
 def xpview(request):
-    return HttpResponse(level(xp()))
+    context = {'xp': level(xp())}
+    return render(request, 'index.html', context)
