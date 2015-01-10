@@ -7,6 +7,7 @@ class Activity(models.Model):
     def __unicode__(self):
         return self.name
 
+
 class TimeLog(models.Model):
     user = models.ForeignKey(User)
     date = models.DateTimeField(auto_now_add=True)
@@ -14,10 +15,20 @@ class TimeLog(models.Model):
     notes = models.TextField()
     minutes = models.IntegerField(default=0)
 
-# class Badge(models.Model):
-#     activity = models.ForeignKey(Activity)
-#     level = models.CharField(choices=(
-#         ('wood', 'wood'),
-#         ('bronze', 'bronze'),
-#         ('silver', 'silver'),
-#     ))
+
+class Badge(models.Model):
+    user = models.ForeignKey(User)
+    level = models.CharField(choices=(
+         ('wood', 'wood'),
+         ('bronze', 'bronze'),
+         ('silver', 'silver'),
+         ('gold', 'gold'),
+    ), max_length=20)
+
+
+class BadgeType(models.Model):
+    activity = models.ForeignKey(Activity, null=True)
+    name = models.CharField(max_length=30)
+    #type = [times tracked, days consecutive tracked, net time tracked]
+    #increments = [1,2,5,10]
+    #image = models.ImageField()
