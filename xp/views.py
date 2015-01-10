@@ -5,11 +5,8 @@ from django.shortcuts import render
 
 from xp.models import TimeLog
 
-trees = ["lifetree", "coursera", "euler"]
-
-
-def xp():
-    return TimeLog.objects.aggregate(Sum('minutes'))['minutes__sum']
+def xp(request):
+    return TimeLog.objects.filter(user=request.user).aggregate(Sum('minutes'))['minutes__sum']
 
 
 def level(xpamt):
@@ -20,5 +17,9 @@ def level(xpamt):
     return "".join(map(str,(["Level", level, " Xp ",xpamt, "<br/>", lower, "*"*pct+'.'*(10-pct) ,upper])))
 
 def xpview(request):
-    context = {'xp': level(xp())}
+    context = {'xp': level(xp(request))}
     return render(request, 'index.html', context)
+
+#TODO: frp on frontend - baconjs
+#TODO: http://baconjs.blogspot.fi/2013/02/chicken-egg-and-baconjs.html
+#TODO: maybe not
