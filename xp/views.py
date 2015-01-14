@@ -17,7 +17,13 @@ def level(xpamt):
     return "".join(map(str,(["Level", level, " Xp ",xpamt, "<br/>", lower, "*"*pct+'.'*(10-pct) ,upper])))
 
 def xpview(request):
-    context = {'xp': level(xp(request))}
+    logs = TimeLog.get_daily(request.user)
+    avg_time = xp(request) / (len(logs) or 1)
+    context = {
+        'xp': level(xp(request)),
+        'logs': TimeLog.get_daily(request.user),
+        'avg': avg_time
+    }
     return render(request, 'index.html', context)
 
 #TODO: frp on frontend - baconjs

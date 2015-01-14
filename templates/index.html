@@ -12,5 +12,14 @@
     </div>
 
     <img width="100" src="{% static 'images/Dp65Cmg.png' %}">
+
+    <div>
+        avg time: {{ avg }}
+    </div>
+    <table>
+        {% for log in logs %}
+        <tr><td>{{ log }}</td></tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
