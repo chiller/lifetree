@@ -11,12 +11,11 @@ class Activity(models.Model):
 
 class TimeLog(models.Model):
     user = models.ForeignKey(User)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateTimeField(auto_now_add=True, editable=True)
+    date.editable = True
     activity = models.ForeignKey(Activity)
     notes = models.TextField()
     minutes = models.IntegerField(default=0)
-
-
 
     @classmethod
     def get_daily(cls, user):
@@ -34,10 +33,10 @@ class TimeLog(models.Model):
 class Badge(models.Model):
     user = models.ForeignKey(User)
     level = models.CharField(choices=(
-         ('wood', 'wood'),
-         ('bronze', 'bronze'),
-         ('silver', 'silver'),
-         ('gold', 'gold'),
+        ('wood', 'wood'),
+        ('bronze', 'bronze'),
+        ('silver', 'silver'),
+        ('gold', 'gold'),
     ), max_length=20)
 
 

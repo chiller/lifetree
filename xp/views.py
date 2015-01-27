@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -16,6 +17,7 @@ def level(xpamt):
     pct = int((xpamt - lower)*1.0 / (upper - lower) * 10)
     return "".join(map(str,(["Level", level, " Xp ",xpamt, "<br/>", lower, "*"*pct+'.'*(10-pct) ,upper])))
 
+@login_required(login_url="/admin")
 def xpview(request):
     logs = TimeLog.get_daily(request.user)
     avg_time = xp(request) / (len(logs) or 1)
